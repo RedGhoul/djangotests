@@ -1,12 +1,8 @@
 # Base Image
 FROM python:3.6
-
 # create and set working directory
 RUN mkdir /app
 WORKDIR /app
-
-# Add current directory code to working directory
-ADD . /app/
 
 # set default environment variables
 ENV PYTHONUNBUFFERED 1
@@ -35,5 +31,5 @@ RUN pip install -r requirements.txt
 EXPOSE 8080
 
 RUN python manage.py collectstatic --noinput
-
+ADD . /app/
 CMD ["./start.sh"]

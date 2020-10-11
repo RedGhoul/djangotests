@@ -1,13 +1,14 @@
 # Base Image
-FROM python:3.6
-# create and set working directory
-RUN mkdir /app
-WORKDIR /app
-
+FROM python:3.8
 # set default environment variables
 ENV PYTHONUNBUFFERED 1
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
+# create and set working directory
+RUN mkdir /app
+WORKDIR /app
+ADD . /app/
+
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -23,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # install environment dependencies
 RUN pip3 install --upgrade pip
-ADD . /app/
+
 RUN pip install -r requirements.txt
 
 # Install project dependencies

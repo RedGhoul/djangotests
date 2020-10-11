@@ -34,4 +34,5 @@ EXPOSE 8080
 
 RUN python manage.py collectstatic --noinput
 
-CMD ["./start.sh"]
+CMD gunicorn tutorialSite.wsgi:application --workers=3 --bind 0.0.0.0:8080 & python manage.py qcluster 
+

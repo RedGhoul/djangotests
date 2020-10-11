@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # install environment dependencies
 RUN pip3 install --upgrade pip
+ADD . /app/
 RUN pip install -r requirements.txt
 
 # Install project dependencies
@@ -31,5 +32,5 @@ RUN pip install -r requirements.txt
 EXPOSE 8080
 
 RUN python manage.py collectstatic --noinput
-ADD . /app/
+
 CMD ["./start.sh"]

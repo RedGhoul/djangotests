@@ -140,3 +140,4 @@ Q_CLUSTER = {
     "name": "basic",
     "orm": "default",  # Use Django's ORM + database for broker
 }
+# hellp

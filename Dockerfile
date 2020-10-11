@@ -21,11 +21,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-dev \
         python3-venv \
         git \
-        supervisor \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
 
 # install environment dependencies
 RUN pip3 install --upgrade pip
@@ -37,4 +35,5 @@ RUN pip install -r requirements.txt
 EXPOSE 8080
 
 RUN python manage.py collectstatic --noinput
+
 CMD ["./start.sh"]

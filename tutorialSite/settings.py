@@ -8,9 +8,12 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
+
+venv\Scripts\activate 
 """
 
 from pathlib import Path
+from decouple import config
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+# pip freeze > requirements.txt
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_q',
+    'first_app',
 ]
 
 MIDDLEWARE = [
@@ -77,10 +82,10 @@ WSGI_APPLICATION = 'tutorialSite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djangotest',
-        'USER': 'postgres',
-        'PASSWORD': 'Basappa123)',
-        'HOST': '165.227.202.243',
+        'NAME': config('DBNAME'),
+        'USER': config('DBUSERNAME'),
+        'PASSWORD': config('DBPASSWORD'),
+        'HOST':  config('DBHOST'),
         'PORT': '5432',
     }
 }
@@ -124,12 +129,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# if DEBUG:
-#    STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'static'),
-#    ]
-# else:
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Configure your Q cluster
+# More details https://django-q.readthedocs.io/en/latest/configure.html
+Q_CLUSTER = {
+    "name": "basic",
+    "orm": "default",  # Use Django's ORM + database for broker
+}

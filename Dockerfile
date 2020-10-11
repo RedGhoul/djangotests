@@ -13,11 +13,6 @@ ENV PYTHONUNBUFFERED 1
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
-# set project environment variables
-# grab these via Python's os.environ
-# these are 100% optional here
-ENV PORT=8080
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
         tzdata \
@@ -26,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-dev \
         python3-venv \
         git \
+        supervisor \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -41,5 +37,4 @@ RUN pip install -r requirements.txt
 EXPOSE 8080
 
 RUN python manage.py collectstatic --noinput
-
-CMD gunicorn tutorialSite.wsgi:application --bind 0.0.0.0:$PORT
+CMD ["./start.sh"]

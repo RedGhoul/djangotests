@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+    <div class="djangotwo">
+        {% if user_records %}
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Email<th>
+                </thead>
+                {% for user in user_records %}
+                    <tr>
+                        <td>{{ user }}</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+
+        {% else %}
+            <h1>Nothing here yet</h1>
+        {% endif %}
+    </div>
+</body>
+</html>

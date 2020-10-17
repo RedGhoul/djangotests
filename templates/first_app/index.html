@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static  %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,9 +7,29 @@
     <link rel="stylesheet" href="{% static "css/mystyle.css" %}"/>
 </head>
 <body>
-    <h1>Hello this is index .html</h1>
-    <h3>{{ insert_me }}</h3>
     <img src="{% static "images/gbepvjettqttzqlz_1593258788.jpeg" %}" alt="hi">
+    <h1>Hi welcome to django</h1>
+    <h3>Here are the access recs</h3>
+    <div class="djangotwo">
+        {% if access_records %}
+            <table>
+                <thead>
+                    <th>Site Name</th>
+                    <th>Date Accessed</th>
+                </thead>
+                {% for access in access_records %}
+                    <tr>
+                        <td>{{ access.name }}</td>
+                        <td>{{ access.date }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+
+        {% else %}
+            <h1>Nothing here yet</h1>
+        {% endif %}
+    </div>
 
 </body>
 </html>

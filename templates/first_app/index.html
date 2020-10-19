@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>First App</title>
-    <link rel="stylesheet" href="{% static "css/mystyle.css" %}"/>
-</head>
-<body>
-    <img src="{% static "images/gbepvjettqttzqlz_1593258788.jpeg" %}" alt="hi">
-    <h1>Hi welcome to django</h1>
-    <h3>Here are the access recs</h3>
-    <div class="djangotwo">
+
+{% extends "first_app/base.html" %}
+{% block body_block %}
+    {% load my_extras %}
+    <h1>{{ text | upper}}</h1>
+    <h1>{{ text | mma }}</h1>
+    <h2>{{ number | add:"1000000000000000000000"}}</h2>
+    <div>
         {% if access_records %}
             <table>
                 <thead>
-                    <th>Site Name</th>
-                    <th>Date Accessed</th>
+                <th>Site Name</th>
+                <th>Date Accessed</th>
                 </thead>
                 {% for access in access_records %}
                     <tr>
@@ -30,6 +25,21 @@
             <h1>Nothing here yet</h1>
         {% endif %}
     </div>
-
-</body>
-</html>
+    <form>
+        <input id="target" type="text" value="Hello there">
+    </form>
+    <div id="other">
+        Trigger the handler
+    </div>
+{% endblock %}
+{% block footer_block %}
+    <script>
+    // ctrl + alt + "l"
+        $(document).ready(function () {
+            console.log("ready!");
+            $("#target").select(function () {
+                alert("Handler for .select() called.");
+            });
+        });
+    </script>
+{% endblock %}

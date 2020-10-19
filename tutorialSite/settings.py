@@ -15,9 +15,9 @@ venv\Scripts\activate
 from pathlib import Path
 from decouple import config
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -29,7 +29,6 @@ SECRET_KEY = '4amx%hgth!!d7i6lq-^1wiwu%n#*dha@#6y$@)6@vve)6nxw!!'
 DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 # pip freeze > requirements.txt
@@ -75,7 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tutorialSite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -85,14 +83,20 @@ DATABASES = {
         'NAME': config('DBNAME'),
         'USER': config('DBUSERNAME'),
         'PASSWORD': config('DBPASSWORD'),
-        'HOST':  config('DBHOST'),
+        'HOST': config('DBHOST'),
         'PORT': '5432',
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -100,6 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 9
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -108,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -122,8 +128,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{#Have to reload this sometimes to get it to work#}
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base HTML</title>
+    <link rel="stylesheet" href="{% static "css/mystyle.css" %}"/>
+</head>
+<body>
+    <img src="{% static "images/gbepvjettqttzqlz_1593258788.jpeg" %}" alt="hi">
+    <h1>Hi welcome to django</h1>
+    <h3>Here are the access recs</h3>
+    <a href="{% url 'first_app:createuser' %}">Create user</a>
+    <a href="{% url 'first_app:formname' %}">Form Name</a>
+    <a href="{% url 'first_app:user' %}">Link to users</a>
+    <a href="{% url 'admin:index' %}">Admin login</a>
+
+    {% block body_block %}
+
+    {% endblock %}
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<footer>
+    {% block footer_block %}
+    {% endblock %}
+</footer>
+</html>

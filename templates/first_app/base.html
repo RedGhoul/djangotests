@@ -12,11 +12,16 @@
     <img src="{% static "images/gbepvjettqttzqlz_1593258788.jpeg" %}" alt="hi">
     <h1>Hi welcome to django</h1>
     <h3>Here are the access recs</h3>
-    <a href="{% url 'first_app:createuser' %}">Create user</a>
-    <a href="{% url 'first_app:formname' %}">Form Name</a>
+
+
     <a href="{% url 'first_app:user' %}">Link to users</a>
     <a href="{% url 'admin:index' %}">Admin login</a>
-
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">logout</a></li>
+    {% else %}
+        <a href="{% url 'first_app:register' %}">register</a>
+        <a href="{% url 'first_app:login' %}">login</a>
+    {% endif %}
     {% block body_block %}
 
     {% endblock %}

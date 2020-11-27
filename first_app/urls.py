@@ -6,7 +6,8 @@ from django.urls import path
 app_name = 'first_app'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('register'.views.register,name='register'),
+    path('register', views.register,name='register'),
+    path('login', views.user_login,name='login'),
     path('formname', views.index_form,name='formname'),
     path('createuser', views.create_user_form,name='createuser'),
     path('users', views.indexUser, name='user'),
